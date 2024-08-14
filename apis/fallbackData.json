@@ -1,0 +1,23 @@
+{
+  "darkMode": true,
+  "lastLoginDate": "2024-08-01",
+  "lastSynced": "2024-08-01",
+  "loginStreak": 3,
+  "nextTaskId": 2,
+  "tasks": [
+    {
+      "completed": false,
+      "completedDate": "",
+      "dateCreated": "2024-07-30T12:01:16.616Z",
+      "deleted": false,
+      "difficulty": 1,
+      "dueDate": "2025-01-01T12:01:16.616Z",
+      "id": 1,
+      "importance": 2,
+      "remarks": "",
+      "title": "Pay utility bills"
+    }
+  ],
+  "userExp": 6000,
+  "userName": "Jason"
+}
