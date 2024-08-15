@@ -1,16 +1,13 @@
-# Sample Snack app
-
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
-
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
-
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
-
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
-
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
-
-
 # Design considerations
-1) firestore database schema. users and tasks separated - pricing! better to combine to reduce number of calls and periodically update database
+1) firestore database schema. users and tasks separated - firebase pricing! better to combine to reduce number of calls and periodically update database
 not scalable as number of tasks = number or reads/ writes
+2) syncs with cloud (firebase) every minute
+3) add to calendar
+4) CRUD actions with tasks
+5) Create, edit, delete, restore tasks
+6) soft deletes to prevent user error. User can manually restore completed / deleted tasks. Users are also given the option to do a quick undo (5 seconds) after delete action.
+7) game element of leveling and exp - daily exp award, task completion award, rank progression chart, user stats log.
+8) custom sort function to allow users to sort outstanding tasks by due date, difficulty, and importance. they can further sort based on an ascending or descending order.
+9) custom user display name
+10) light dark mode
+11) response interface with toast for user interactions i.e task creation, task updated, task completed, task deleted 
