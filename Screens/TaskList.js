@@ -91,7 +91,9 @@ const TaskListScreen = () => {
   };
 
   const handleMarkComplete = (id) => {
-    dispatch(setTaskCompleted(id));
+    const today = dayjs();
+    const todayString = today.toISOString();
+    dispatch(setTaskCompleted({ id: id, dateCreated: todayString }));
     dispatch(updateUserExp({ operation: "add", value: 10 }));
     Toast.show({
       type: "success",
@@ -425,14 +427,7 @@ const TaskListScreen = () => {
                   ))
                 ) : (
                   <View>
-                    <Text
-                      style={{
-                        padding: 18,
-                        color: "grey",
-                      }}
-                    >
-                      No tasks found
-                    </Text>
+                    <Text style={styles.greyedText}>No tasks found</Text>
                   </View>
                 )}
               </List.Section>
@@ -454,14 +449,7 @@ const TaskListScreen = () => {
                   ))
                 ) : (
                   <View>
-                    <Text
-                      style={{
-                        padding: 18,
-                        color: "grey",
-                      }}
-                    >
-                      No tasks found
-                    </Text>
+                    <Text style={styles.greyedText}>No tasks found</Text>
                   </View>
                 )}
               </List.Section>
@@ -483,14 +471,7 @@ const TaskListScreen = () => {
                   ))
                 ) : (
                   <View>
-                    <Text
-                      style={{
-                        padding: 18,
-                        color: "grey",
-                      }}
-                    >
-                      No tasks found
-                    </Text>
+                    <Text style={styles.greyedText}>No tasks found</Text>
                   </View>
                 )}
               </List.Section>
@@ -538,7 +519,6 @@ const createStyles = (darkMode) => {
       fontFamily: "Roboto-Light",
       color: darkMode ? colors.darkText : colors.lightText,
       fontSize: windowsWidth * 0.16,
-      marginBottom: windowsWidth * 0.03,
     },
 
     insideTextSmallGrey: {
@@ -621,6 +601,13 @@ const createStyles = (darkMode) => {
       color: "crimson",
       fontFamily: "Roboto-Regular",
       textAlignVertical: "center",
+    },
+
+    greyedText: {
+      padding: 18,
+      fontFamily: "Roboto-Light",
+      color: "grey",
+      fontSize: windowsWidth * 0.16,
     },
   });
   return styles;

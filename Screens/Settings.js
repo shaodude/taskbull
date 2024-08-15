@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Provider, Switch } from "react-native-paper";
@@ -188,7 +188,7 @@ const createStyles = (darkMode) => {
 
     syncText: {
       textAlign: "left",
-      fontSize: windowsWidth * 0.15,
+      fontSize: windowsWidth * 0.14,
       color: darkMode ? colors.darkText : colors.lightText,
       fontFamily: "Roboto-Light",
     },
@@ -217,7 +217,7 @@ const createStyles = (darkMode) => {
     syncBox: {
       width: "100%",
       paddingBottom: windowsWidth * 0.08,
-      marginTop: windowsWidth * 0.3,
+      marginTop: windowsWidth * 0.45,
       justifyContent: "center",
       alignItems: "center",
     },

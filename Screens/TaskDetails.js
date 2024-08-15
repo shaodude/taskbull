@@ -20,7 +20,6 @@ import {
 import { colors } from "../styles";
 import TextIconButton from "../components/TextIconButton";
 import { setTaskCompleted, deleteTask, restoreTask } from "../redux/taskSlice";
-import { updateUserExp } from "../redux/userSlice";
 
 // Force Portrait mode
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
@@ -121,7 +120,6 @@ const TaskDetailsScreen = () => {
 
   const handleRestore = () => {
     setOptionsVisible(false);
-    dispatch(updateUserExp({ operation: "subtract", value: 10 }));
     setTimeout(() => {
       dispatch(restoreTask(taskSelected.id));
     }, 500);

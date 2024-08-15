@@ -72,12 +72,13 @@ const HomeScreen = () => {
   });
 
   const userMotivation = useSelector((state) => state.user.userMotivation);
+  // get tasks due within the week
   const tasksDueSoon = outstandingTasks.filter((task) => {
     const dueDate = dayjs(task.dueDate);
     const today = dayjs();
     return (
       !task.completed &&
-      dueDate.diff(today, "day") < 3 &&
+      dueDate.diff(today, "day") < 7 &&
       dueDate.diff(today, "day") >= 0
     );
   });
@@ -154,16 +155,18 @@ const HomeScreen = () => {
       const diffInDays = today.diff(completedDate, "day");
       return diffInDays <= 7 && diffInDays >= 0;
     });
-
+    console.log(tasksCompletedRecently);
     const motivationScore = tasksCompletedRecently.reduce((total, task) => {
-      return total + task.importance;
+      return parseInt(total) + parseInt(task.difficulty);
     }, 0);
 
     dispatch(setUserMotivation(motivationScore));
   }, [dispatch, taskList]);
 
   const handleMarkComplete = (id) => {
-    dispatch(setTaskCompleted(id));
+    const today = dayjs();
+    const todayString = today.toISOString();
+    dispatch(setTaskCompleted({ id: id, dateCreated: todayString }));
     dispatch(updateUserExp({ operation: "add", value: 10 }));
     Toast.show({
       type: "success",
@@ -282,16 +285,9 @@ const HomeScreen = () => {
           style={{ marginTop: 10 }}
           onPress={() => navigation.navigate("Game")}
         >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              paddingVertical: 10,
-            }}
-          >
+          <View style={styles.personalStatsBox}>
             {currentRank && (
-              <View style={{ flexDirection: "row" }}>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <FontAwesomeIcon
                   icon={iconMap[currentRank.icon]}
                   size={25}
@@ -307,14 +303,7 @@ const HomeScreen = () => {
             )}
           </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              paddingVertical: 10,
-            }}
-          >
+          <View style={styles.personalStatsBox}>
             <Ionicons
               name="prism"
               size={25}
@@ -421,11 +410,8 @@ const HomeScreen = () => {
       <ScrollView>
         <View style={styles.container}>
           <GreetingMessage />
-
           <RecommendedTask />
-
           <PersonalStats />
-
           <TasksDueSoon />
         </View>
       </ScrollView>
@@ -506,11 +492,17 @@ const createStyles = (darkMode) => {
       marginTop: 10,
     },
 
+    personalStatsBox: {
+      flexDirection: "row",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      paddingVertical: 10,
+    },
+
     insideTextSmall: {
       fontFamily: "Roboto-Light",
       color: darkMode ? colors.darkText : colors.lightText,
       fontSize: windowsWidth * 0.16,
-      marginBottom: windowsWidth * 0.03,
     },
 
     greyTextSmall: {
