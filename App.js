@@ -7,7 +7,7 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { colors } from "./styles";
-import { StatusBar, View, Text } from "react-native";
+import { AppState, StatusBar, View, Text } from "react-native";
 import store from "./redux/store";
 import {
   fetchUserData,
@@ -33,39 +33,77 @@ const MainApp = () => {
 
   const userDataStatus = useSelector((state) => state.user.status);
 
+  const appState = useRef(AppState.currentState);
+
+  // fetch user data when app starts
   useEffect(() => {
     dispatch(fetchUserData());
   }, [dispatch]);
 
-  const intervalRef = useRef(null);
-
-  useEffect(() => {
-    const syncWithCloud = () => {
-      dispatch(updateUserData());
-      // Get today's date and time
-      const now = dayjs();
-      // Format the date and time as a string
-      const formattedDate = now.format("YYYY-MM-DD HH:mm:ss");
-      dispatch(setLastSynced(formattedDate));
-      console.log("synced!");
-    };
-
-    // Set up the interval to sync with the cloud every 1 minute
-    intervalRef.current = setInterval(syncWithCloud, 1 * 60 * 1000);
-
-    // Clean up the interval when the component unmounts
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [dispatch]);
-
+  // wait for font to be loaded and user data to be loaded into redux state
   useEffect(() => {
     if ((loaded || error) && userDataStatus === "initialized") {
       SplashScreen.hideAsync();
     }
   }, [loaded, error, userDataStatus]);
+
+  // update user data every time application blurs 
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState) => {
+      if (
+        appState.current.match(/active/) &&
+        nextAppState.match(/inactive|background/)
+      ) {
+        const syncWithCloud = () => {
+          dispatch(updateUserData());
+          // get today's date and time
+          const now = dayjs();
+          // format the date and time as a string
+          const formattedDate = now.format("YYYY-MM-DD HH:mm:ss");
+          dispatch(setLastSynced(formattedDate));
+        };
+
+        syncWithCloud();
+      }
+
+      // update the current app state
+      appState.current = nextAppState;
+    };
+
+    const subscription = AppState.addEventListener(
+      "change",
+      handleAppStateChange
+    );
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  // const intervalRef = useRef(null);
+
+  // update user data every set interval
+  // useEffect(() => {
+  //   const syncWithCloud = () => {
+  //     dispatch(updateUserData());
+  //     // Get today's date and time
+  //     const now = dayjs();
+  //     // Format the date and time as a string
+  //     const formattedDate = now.format("YYYY-MM-DD HH:mm:ss");
+  //     dispatch(setLastSynced(formattedDate));
+  //     console.log("synced!");
+  //   };
+
+  //   // Set up the interval to sync with the cloud every 1 minute
+  //   intervalRef.current = setInterval(syncWithCloud, 1 * 60 * 1000);
+
+  //   // Clean up the interval when the component unmounts
+  //   return () => {
+  //     if (intervalRef.current) {
+  //       clearInterval(intervalRef.current);
+  //     }
+  //   };
+  // }, [dispatch]);
 
   if (!loaded && !error) {
     return null;

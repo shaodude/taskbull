@@ -9,8 +9,9 @@ const TextIconButton = ({
   darkMode,
   onPress,
   whiteBack = true,
+  muted = false,
 }) => {
-  const styles = createStyles(darkMode);
+  const styles = createStyles(darkMode, muted);
   return (
     <TouchableOpacity style={styles.buttonBox} onPress={onPress}>
       <Text style={styles.innerText}>{buttonText}</Text>
@@ -20,13 +21,15 @@ const TextIconButton = ({
             style={{ position: "absolute" }}
             name="ellipse"
             size={32}
-            color={colors.darkText}
+            color={muted ? "grey" : colors.darkText}
           />
         )}
         <Ionicons
           name={icon}
           size={32}
-          color={darkMode ? colors.darkAccent : colors.lightAccent}
+          color={
+            muted ? "grey" : darkMode ? colors.darkAccent : colors.lightAccent
+          }
         />
       </View>
     </TouchableOpacity>
@@ -35,7 +38,7 @@ const TextIconButton = ({
 
 const windowsWidth = Dimensions.get("window").width / 4;
 
-const createStyles = (darkMode) => {
+const createStyles = (darkMode, muted) => {
   const styles = StyleSheet.create({
     buttonBox: {
       flexDirection: "row",
@@ -45,7 +48,11 @@ const createStyles = (darkMode) => {
       borderRadius: 20,
       paddingVertical: 12,
       paddingHorizontal: 25,
-      borderColor: darkMode ? colors.darkAccent : colors.lightAccent,
+      borderColor: muted
+        ? "grey"
+        : darkMode
+        ? colors.darkAccent
+        : colors.lightAccent,
     },
 
     innerText: {

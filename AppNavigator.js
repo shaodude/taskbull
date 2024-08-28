@@ -3,6 +3,7 @@ import BottomTabNavigator from "./BottomTabNavigator";
 import CreateTaskScreen from "./Screens/CreateTask";
 import TaskDetailsScreen from "./Screens/TaskDetails";
 import EditTaskScreen from "./Screens/EditTask";
+import ReportIssueScreen from "./Screens/ReportIssue";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ const AppNavigator = () => {
       <Stack.Screen name="CreateTask" component={CreateTaskScreen} />
       <Stack.Screen name="TaskDetails" component={TaskDetailsScreen} />
       <Stack.Screen name="EditTask" component={EditTaskScreen} />
+      <Stack.Screen name="ReportIssue" component={ReportIssueScreen} />
     </Stack.Navigator>
   );
 };

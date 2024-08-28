@@ -11,3 +11,18 @@ not scalable as number of tasks = number or reads/ writes
 9) custom user display name
 10) light dark mode
 11) response interface with toast for user interactions i.e task creation, task updated, task completed, task deleted 
+
+
+    1) test("returns highest scoring Difficult task when user is motivated (>=10) there are multiple tasks with none due in 48 hours", () => {...});
+      
+    2) test("returns null when there are no tasks", () => {...});
+
+    3) test("returns task due within 48 hours when there is one", () => {...});
+
+    4) test("returns the most important task due in 48 hours when there is more than one", () => {...});
+
+    5) test("returns highest scoring Easy task when user is not motivated (<10) there are multiple tasks with none due in 48 hours", () => {... });
+
+    6) test("returns highest scoring Difficult task when user is motivated (>=10) there are multiple tasks with none due in 48 hours", () => {...});
+
+    7) test("throws an error for invalid date", () => {...});

@@ -80,27 +80,58 @@ const TaskDetailsScreen = () => {
       allDay: true,
       notes: taskSelected.remarks,
     };
-
     try {
-      const eventId = await Calendar.createEventAsync(calendarId, eventDetails);
-      console.log("Event created:", eventId);
-      Toast.show({
-        type: "success",
-        text1: "Added to calendar!",
-        text2: "Press to dismiss",
-        visibilityTime: 3000,
-        autoHide: true,
-        position: "bottom",
-        onPress: () => Toast.hide(),
-      });
+      // Fetch existing events on the same day
+      const existingEvents = await Calendar.getEventsAsync(
+        [calendarId],
+        eventDetails.startDate,
+        eventDetails.endDate
+      );
+
+      // Check if an event with the same title already exists
+      const eventExists = existingEvents.some(
+        (event) => event.title === eventDetails.title
+      );
+
+      if (eventExists) {
+        console.log("Event already exists in the calendar.");
+        Toast.show({
+          type: "info",
+          text1: "Event already exists!",
+          text2: "No duplicate created.",
+          visibilityTime: 3000,
+          autoHide: true,
+          position: "bottom",
+          onPress: () => Toast.hide(),
+        });
+        return;
+      } else {
+        // If event does not exist, create it
+        const eventId = await Calendar.createEventAsync(
+          calendarId,
+          eventDetails
+        );
+        console.log("Event created:", eventId);
+        Toast.show({
+          type: "success",
+          text1: "Added to calendar!",
+          text2: "Press to dismiss",
+          visibilityTime: 3000,
+          autoHide: true,
+          position: "bottom",
+          onPress: () => Toast.hide(),
+        });
+      }
     } catch (error) {
       console.log("Error creating event:", error);
     }
   };
 
   const handleMarkComplete = () => {
-    const todayString = today.toISOString(); 
-    dispatch(setTaskCompleted({id: taskSelected.id, dateCreated: todayString}));
+    const todayString = today.toISOString();
+    dispatch(
+      setTaskCompleted({ id: taskSelected.id, dateCreated: todayString })
+    );
     Toast.show({
       type: "success",
       text1: "Task Completed!",
@@ -164,8 +195,12 @@ const TaskDetailsScreen = () => {
     difficultyData.find((item) => item.key == taskSelected.difficulty)?.value ||
     "Unknown";
 
-  const createdDateFormatted = dayjs(taskSelected.dateCreated).format("MMMM D, YYYY");
-  const completedDateFormatted = dayjs(taskSelected.completedDate).format("MMMM D, YYYY");
+  const createdDateFormatted = dayjs(taskSelected.dateCreated).format(
+    "MMMM D, YYYY"
+  );
+  const completedDateFormatted = dayjs(taskSelected.completedDate).format(
+    "MMMM D, YYYY"
+  );
 
   return (
     <Provider>

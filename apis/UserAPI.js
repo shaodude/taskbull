@@ -12,6 +12,7 @@ const getUserData = async (userId) => {
     const docSnap = await getDoc(docRef);
 
     const userData = docSnap.data();
+    console.log("User data successfully fetched!");
     return userData;
   } catch (e) {
     console.error("Error fetching user details:", e);

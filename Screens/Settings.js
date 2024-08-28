@@ -1,10 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Provider, Switch } from "react-native-paper";
 import Toast from "react-native-toast-message";
 import dayjs from "dayjs";
+import emailjs, { EmailJSResponseStatus } from "@emailjs/react-native";
 import {
   ScrollView,
   View,
@@ -15,6 +17,7 @@ import {
   KeyboardAvoidingView,
   TextInput,
   Keyboard,
+  TouchableOpacity,
 } from "react-native";
 import { colors } from "../styles";
 import TextIconButton from "../components/TextIconButton";
@@ -30,6 +33,7 @@ ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
 
 const SettingsScreen = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const darkMode = useSelector((state) => state.user.darkMode);
   const userName = useSelector((state) => state.user.userName);
   const styles = createStyles(darkMode);
@@ -65,6 +69,44 @@ const SettingsScreen = () => {
     // Format the date and time as a string
     const formattedDate = now.format("YYYY-MM-DD HH:mm:ss");
     dispatch(setLastSynced(formattedDate));
+
+    Toast.show({
+      type: "success",
+      text1: "Synced wth cloud!",
+      text2: "Press to dismiss",
+      visibilityTime: 3000,
+      autoHide: true,
+      position: "bottom",
+      onPress: () => Toast.hide(),
+    });
+  };
+
+  const templateParams = {
+    user_id: "123123",
+    message: "Check this out!",
+  };
+
+  const handleReport = async () => {
+    // try {
+    //   await emailjs.send(
+    //     "service_xnh7dxo",
+    //     "template_t52fqut",
+    //     templateParams,
+    //     {
+    //       publicKey: "OmXbZpvdGK8oyrn8Q",
+    //     }
+    //   );
+    //   console.log("SUCCESS!");
+    // } catch (err) {
+    //   if (err instanceof EmailJSResponseStatus) {
+    //     console.log("EMAILJS FAILED...", err);
+    //     return;
+    //   }
+
+    //   console.log("ERROR", err);
+    // }
+    navigation.navigate("ReportIssue");
+
   };
 
   return (
@@ -118,6 +160,17 @@ const SettingsScreen = () => {
                   value={isDarkSwitchOn}
                   onValueChange={onToggleSwitch}
                   style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] }}
+                />
+              </View>
+
+              <View style={{ marginTop: 40, width: "50%" }}>
+                <TextIconButton
+                  icon="alert-circle-outline"
+                  buttonText="Report an issue"
+                  darkMode={darkMode}
+                  onPress={handleReport}
+                  whiteBack={false}
+                  muted={true}
                 />
               </View>
 
@@ -217,7 +270,7 @@ const createStyles = (darkMode) => {
     syncBox: {
       width: "100%",
       paddingBottom: windowsWidth * 0.08,
-      marginTop: windowsWidth * 0.45,
+      marginTop: windowsWidth * 0.4,
       justifyContent: "center",
       alignItems: "center",
     },

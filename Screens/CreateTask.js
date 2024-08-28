@@ -135,7 +135,7 @@ const CreateTaskScreen = () => {
       position: "bottom",
       onPress: () => Toast.hide(),
     });
-    navigation.navigate("Home");
+    navigation.navigate("TaskList");
   };
 
   const handleDone = () => {

@@ -109,7 +109,7 @@ const HomeScreen = () => {
         console.log("Incremented daily streak!");
       }
       if (loginStreak >= 3) {
-        dispatch(updateUserExp({ operation: "add", value: 20 }));
+        dispatch(updateUserExp({ operation: "add", value: 30 }));
       } else {
         dispatch(updateUserExp({ operation: "add", value: 10 }));
       }
@@ -155,7 +155,6 @@ const HomeScreen = () => {
       const diffInDays = today.diff(completedDate, "day");
       return diffInDays <= 7 && diffInDays >= 0;
     });
-    console.log(tasksCompletedRecently);
     const motivationScore = tasksCompletedRecently.reduce((total, task) => {
       return parseInt(total) + parseInt(task.difficulty);
     }, 0);
