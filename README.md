@@ -29,10 +29,17 @@ Next, run this command in the terminal to install dependencies packages.
 ```
 npm install
 ```
-After all packages are installed, run the application by running this command in the terminal.
+After all packages are installed, bundle the application by running this command in the terminal.
 ```
 npx expo
 ```
+The application should be bundled and waiting.
+
+![Interface Snapshots](./assets/sample_run.png)
+
+You can launch the application on your own device using Expo Go (required download). Read more on https://expo.dev/go.
+
+Alternatively, you can launch the application using an emulator (requires download and setup).
 
 
 ## Testing
