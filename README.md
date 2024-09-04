@@ -1,28 +1,41 @@
-# Design considerations
-1) firestore database schema. users and tasks separated - firebase pricing! better to combine to reduce number of calls and periodically update database
-not scalable as number of tasks = number or reads/ writes
-2) syncs with cloud (firebase) every minute
-3) add to calendar
-4) CRUD actions with tasks
-5) Create, edit, delete, restore tasks
-6) soft deletes to prevent user error. User can manually restore completed / deleted tasks. Users are also given the option to do a quick undo (5 seconds) after delete action.
-7) game element of leveling and exp - daily exp award, task completion award, rank progression chart, user stats log.
-8) custom sort function to allow users to sort outstanding tasks by due date, difficulty, and importance. they can further sort based on an ascending or descending order.
-9) custom user display name
-10) light dark mode
-11) response interface with toast for user interactions i.e task creation, task updated, task completed, task deleted 
+# Taskbull - A Task Manager Mobile Application
+
+## Project Description
+Taskbull is a modern task manager application developed as part of a Final Year Project (FYP). It features a robust task prioritization algorithm and includes all essential features to offer users an effective and user-friendly task management experience.
 
 
-    1) test("returns highest scoring Difficult task when user is motivated (>=10) there are multiple tasks with none due in 48 hours", () => {...});
-      
-    2) test("returns null when there are no tasks", () => {...});
+## Application Features
+1. Task Recommendation: Utilizes a Task Prioritization Algorithm to recommend tasks based on the Eisenhower Matrix and the user's motivation level.
 
-    3) test("returns task due within 48 hours when there is one", () => {...});
+2. Task Management: Provides essential functions like Create, Edit, View, Delete, Mark as Completed, and Restore tasks. A soft delete approach is used to manage task removal.
 
-    4) test("returns the most important task due in 48 hours when there is more than one", () => {...});
+3. Levelling System: Incorporates a leveling system inspired by the chess hierarchy, where users earn experience points (EXP) through daily logins, login streaks, and task completions.
 
-    5) test("returns highest scoring Easy task when user is not motivated (<10) there are multiple tasks with none due in 48 hours", () => {... });
+4. Cloud Backup: Optimized per session read/write request, user data persists between sessions.
 
-    6) test("returns highest scoring Difficult task when user is motivated (>=10) there are multiple tasks with none due in 48 hours", () => {...});
+5. Dark/Light Mode: Supports both dark and light themes for user preference.
 
-    7) test("throws an error for invalid date", () => {...});
+6. User Feedback Channel: Allows users to provide feedback directly to the developer via a "Report an Issue" button on the Settings page.
+
+7. Add to Calendar: Users can add tasks directly to their calendar with built-in validation to prevent duplicate event creation.
+
+8. Application Feedback: Every user action receives feedback through Toast Messages, ensuring a responsive and interactive experience.
+
+
+## How to Run
+First, ensure that package-lock.json is deleted.
+
+Next, run this command in the terminal to install dependencies packages.
+```
+npm install
+```
+After all packages are installed, run the application by running this command in the terminal.
+```
+npx expo
+```
+
+
+## Testing
+1. Unit Testing by Jest.
+
+2. User Testing using Blackbox (Task-based Testing) and User Acceptance Testing (UAT) with System Usability Scale (SUS) template.
