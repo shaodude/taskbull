@@ -49,7 +49,7 @@ const CreateTaskScreen = () => {
 
   const [remarks, onChangeRemarks] = useState("");
 
-  // Define error state object
+  // define error state object
   const [errors, setErrors] = useState({
     title: null,
     selectedImportance: null,

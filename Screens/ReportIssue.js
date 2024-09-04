@@ -32,6 +32,7 @@ const ReportIssueScreen = () => {
   const [message, onChangeMessage] = useState("");
   const [showSpinner, setShowSpinner] = useState(false);
 
+  // configure template params according to template set in EmailJS
   const templateParams = {
     user_id: userId,
     message: message,
@@ -49,7 +50,6 @@ const ReportIssueScreen = () => {
         }
       );
       setShowSpinner(false);
-      console.log("SUCCESS!");
       navigation.navigate("Settings");
       Toast.show({
         type: "success",

@@ -51,7 +51,7 @@ const EditTaskScreen = () => {
   const difficultyData = useSelector((state) => state.tasks.difficultyData);
   const importanceData = useSelector((state) => state.tasks.importanceData);
 
-  // prevent excessive rerenders which cause page to freeze
+  // preload page default inputs with task details
   useEffect(() => {
     if (taskSelected) {
       onChangeTitle(taskSelected.title);
@@ -62,12 +62,12 @@ const EditTaskScreen = () => {
     }
   }, [taskSelected]);
 
-  // Define error state object
   const [errors, setErrors] = useState({
     title: null,
     remarks: null,
   });
 
+  // form validation
   const validateFields = () => {
     const illegalChars = /[<>/\\"';\*|^~{}\[\]]/;
     const newErrors = {};

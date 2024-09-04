@@ -42,6 +42,7 @@ const TaskListScreen = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [defaultOrder, setDefaultOrder] = useState(null);
 
+  // configure display for task list
   useEffect(() => {
     const outstandingTasks = taskList.filter(
       (task) => !task.completed && !task.deleted
@@ -50,10 +51,12 @@ const TaskListScreen = () => {
     setDefaultOrder(outstandingTasks);
   }, [taskList]);
 
+  // handle create task button on click
   const handleCreateTask = () => {
     navigation.navigate("CreateTask");
   };
 
+  // sort tasks based on property and order
   const sortTasks = (property, order) => {
     const sortedTasks = [...displayTodoTasks].sort((a, b) => {
       if (property == "dueDate") {
@@ -79,6 +82,7 @@ const TaskListScreen = () => {
   const orderByAscending = () => sortTasks(selectedSort, "ascending");
   const orderByDescending = () => sortTasks(selectedSort, "descending");
 
+  // revert sort to default
   const sortByDefault = () => {
     setDisplayTodoTasks(defaultOrder);
     setOptionsVisible(false);
@@ -86,6 +90,7 @@ const TaskListScreen = () => {
     setSelectedOrder(null);
   };
 
+  // show task details
   const showDetails = (index) => {
     dispatch(setSelectedTaskID(index));
     navigation.navigate("TaskDetails");

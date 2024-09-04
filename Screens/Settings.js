@@ -6,7 +6,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Provider, Switch } from "react-native-paper";
 import Toast from "react-native-toast-message";
 import dayjs from "dayjs";
-import emailjs, { EmailJSResponseStatus } from "@emailjs/react-native";
 import {
   ScrollView,
   View,
@@ -17,7 +16,6 @@ import {
   KeyboardAvoidingView,
   TextInput,
   Keyboard,
-  TouchableOpacity,
 } from "react-native";
 import { colors } from "../styles";
 import TextIconButton from "../components/TextIconButton";
@@ -81,32 +79,8 @@ const SettingsScreen = () => {
     });
   };
 
-  const templateParams = {
-    user_id: "123123",
-    message: "Check this out!",
-  };
-
   const handleReport = async () => {
-    // try {
-    //   await emailjs.send(
-    //     "service_xnh7dxo",
-    //     "template_t52fqut",
-    //     templateParams,
-    //     {
-    //       publicKey: "OmXbZpvdGK8oyrn8Q",
-    //     }
-    //   );
-    //   console.log("SUCCESS!");
-    // } catch (err) {
-    //   if (err instanceof EmailJSResponseStatus) {
-    //     console.log("EMAILJS FAILED...", err);
-    //     return;
-    //   }
-
-    //   console.log("ERROR", err);
-    // }
     navigation.navigate("ReportIssue");
-
   };
 
   return (

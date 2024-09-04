@@ -45,6 +45,7 @@ const GameScreen = () => {
     return task.completed && !task.deleted;
   });
 
+  // link database rank icon to file's import (can be improved)
   const iconMap = {
     "chess-pawn": faChessPawn,
     "chess-knight": faChessKnight,
@@ -60,11 +61,11 @@ const GameScreen = () => {
     (rank) => userExp >= rank.minExp && userExp <= rank.maxExp
   );
 
-  // Find the next rank based on the current rank
+  // find the next rank based on the current rank
   const currentIndex = ranks.findIndex((rank) => rank === currentRank);
   const nextRank = ranks[currentIndex + 1];
 
-  // Calculate the progress value between 0 and 1
+  // calculate the progress value between 0 and 1
   const progress =
     currentRank && nextRank
       ? (userExp - currentRank.minExp) / (nextRank.minExp - currentRank.minExp)

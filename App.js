@@ -105,6 +105,7 @@ const MainApp = () => {
   //   };
   // }, [dispatch]);
 
+  //  application load state handling
   if (!loaded && !error) {
     return null;
   }

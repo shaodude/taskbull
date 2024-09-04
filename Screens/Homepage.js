@@ -58,7 +58,6 @@ const HomeScreen = () => {
   const currentRank = ranks.find(
     (rank) => userExp >= rank.minExp && userExp <= rank.maxExp
   );
-
   const [greeting, setGreeting] = useState("Welcome");
   const tasksCompletedRecently = taskList.filter((task) => {
     if (!task.completed || task.deleted) {
@@ -72,7 +71,7 @@ const HomeScreen = () => {
   });
 
   const userMotivation = useSelector((state) => state.user.userMotivation);
-  // get tasks due within the week
+
   const tasksDueSoon = outstandingTasks.filter((task) => {
     const dueDate = dayjs(task.dueDate);
     const today = dayjs();
@@ -87,16 +86,22 @@ const HomeScreen = () => {
     navigation.navigate("TaskDetails");
   };
 
+  // get prioritized task
   const prioritizedTask = PrioritizeTask(outstandingTasks, userMotivation);
   const isInitialized = useSelector((state) => state.user.status);
   const lastLoginDate = useSelector((state) => state.user.lastLoginDate);
 
+  // runs at application start,
+  // 1) reward user with daily exp
+  // 2) increase login streak if relevant
+  // 3) set greeting message according to time of day
   useEffect(() => {
     // if api is not yet loaded, do not run this block
     if (isInitialized != "initialized") {
       return;
     }
-    // Check last login date and update login streak
+
+    // check last login date and update login streak
     const today = dayjs();
     const lastLogin = dayjs(lastLoginDate);
     const diffInDays = today.diff(lastLogin, "day");
@@ -132,6 +137,7 @@ const HomeScreen = () => {
     dispatch(updateUserData());
     console.log("Daily exp has already been awarded for today!");
 
+    // get current device time
     const curHr = today.hour();
 
     if (curHr < 12) {
@@ -143,8 +149,8 @@ const HomeScreen = () => {
     }
   }, [dispatch, isInitialized]);
 
+  // Calculate user motivation and set redux state
   useEffect(() => {
-    // Calculate user motivation
     const tasksCompletedRecently = taskList.filter((task) => {
       if (!task.completed || task.deleted) {
         return false;
@@ -155,6 +161,8 @@ const HomeScreen = () => {
       const diffInDays = today.diff(completedDate, "day");
       return diffInDays <= 7 && diffInDays >= 0;
     });
+
+    // user motivation score is based on tasks completed recently
     const motivationScore = tasksCompletedRecently.reduce((total, task) => {
       return parseInt(total) + parseInt(task.difficulty);
     }, 0);
@@ -178,6 +186,7 @@ const HomeScreen = () => {
     });
   };
 
+  // link database rank icon to file's import (need to be improved)
   const iconMap = {
     "chess-pawn": faChessPawn,
     "chess-knight": faChessKnight,

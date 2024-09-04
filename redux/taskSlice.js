@@ -3,17 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialTaskState = {
   taskList: [],
-  taskSelectedID: null,
+  taskSelectedID: null, // used to display task details
   difficultyData: [
     { key: "1", value: "Easy" },
     { key: "2", value: "Medium" },
     { key: "3", value: "Hard" },
-  ],
+  ], // used by dropdown select
   importanceData: [
     { key: "1", value: "Low" },
     { key: "2", value: "Medium" },
     { key: "3", value: "High" },
-  ],
+  ], // used by dropdown select
 };
 
 const taskSlice = createSlice({

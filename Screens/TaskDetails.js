@@ -34,6 +34,8 @@ const TaskDetailsScreen = () => {
   const toggleOptionsMenu = () => setOptionsVisible(!optionsVisible);
   const difficultyData = useSelector((state) => state.tasks.difficultyData);
   const importanceData = useSelector((state) => state.tasks.importanceData);
+
+  // set redux state to selected task - this state is used to render task details page
   const taskSelected = useSelector((state) => {
     const taskList = state.tasks.taskList;
     const taskSelectedID = state.tasks.taskSelectedID;
@@ -43,8 +45,10 @@ const TaskDetailsScreen = () => {
   if (!taskSelected) {
     return <Text>No task selected</Text>;
   }
-  const [calendarId, setCalendarId] = useState(null);
 
+  // Calendar
+  const [calendarId, setCalendarId] = useState(null);
+  // get device default calendar and calendar permissions from user if not already given
   useEffect(() => {
     const getCalendarPermissions = async () => {
       const { status } = await Calendar.requestCalendarPermissionsAsync();
@@ -67,6 +71,7 @@ const TaskDetailsScreen = () => {
     getCalendarPermissions();
   }, []);
 
+  // add event to calendar
   const addEventToCalendar = async () => {
     if (!calendarId) {
       console.log("No calendar selected.");
@@ -81,14 +86,14 @@ const TaskDetailsScreen = () => {
       notes: taskSelected.remarks,
     };
     try {
-      // Fetch existing events on the same day
+      // fetch existing events on the same day
       const existingEvents = await Calendar.getEventsAsync(
         [calendarId],
         eventDetails.startDate,
         eventDetails.endDate
       );
 
-      // Check if an event with the same title already exists
+      // check if an event with the same title already exists
       const eventExists = existingEvents.some(
         (event) => event.title === eventDetails.title
       );
@@ -106,7 +111,7 @@ const TaskDetailsScreen = () => {
         });
         return;
       } else {
-        // If event does not exist, create it
+        // if event does not exist, create it
         const eventId = await Calendar.createEventAsync(
           calendarId,
           eventDetails
@@ -149,6 +154,7 @@ const TaskDetailsScreen = () => {
     setOptionsVisible(false);
   };
 
+  // restore deleted/ completed task
   const handleRestore = () => {
     setOptionsVisible(false);
     setTimeout(() => {
@@ -165,6 +171,7 @@ const TaskDetailsScreen = () => {
     });
   };
 
+  // delete selected task
   const handleDelete = () => {
     dispatch(deleteTask(taskSelected.id));
     Toast.show({
@@ -179,15 +186,13 @@ const TaskDetailsScreen = () => {
     navigation.goBack();
   };
 
+  // undo delete (toast click)
   const handleUndoDelete = () => {
     dispatch(restoreTask(taskSelected.id));
     Toast.hide();
   };
 
-  const today = dayjs();
-  const dueDate = dayjs(taskSelected.dueDate);
-  const daysLeft = dueDate.diff(today, "day");
-
+  // Impotance and difficulty display
   const importanceLabel =
     importanceData.find((item) => item.key == taskSelected.importance)?.value ||
     "Unknown";
@@ -195,6 +200,10 @@ const TaskDetailsScreen = () => {
     difficultyData.find((item) => item.key == taskSelected.difficulty)?.value ||
     "Unknown";
 
+  // configure and format dates
+  const today = dayjs();
+  const dueDate = dayjs(taskSelected.dueDate);
+  const daysLeft = dueDate.diff(today, "day");
   const createdDateFormatted = dayjs(taskSelected.dateCreated).format(
     "MMMM D, YYYY"
   );
