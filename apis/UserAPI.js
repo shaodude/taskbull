@@ -1,8 +1,4 @@
-import {
-  getDoc,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import { getDoc, doc, updateDoc } from "firebase/firestore";
 import db from "./firestore";
 
 const getUserData = async (userId) => {
@@ -11,7 +7,20 @@ const getUserData = async (userId) => {
     const docRef = doc(db, "users", userId);
     const docSnap = await getDoc(docRef);
 
-    const userData = docSnap.data();
+    const rankListdocRef = doc(db, "users", "ranksList");
+    const rankListdocSnap = await getDoc(rankListdocRef);
+
+    // Extract data
+    let userData = docSnap.data();
+    const rankData = rankListdocSnap.data();
+
+    // Add rankData to userData under the 'rank' key
+    userData = {
+      ...userData,
+      rank: rankData.ranks
+    };
+
+    console.log(userData);
     console.log("User data successfully fetched!");
     return userData;
   } catch (e) {

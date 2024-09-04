@@ -15,50 +15,7 @@ const initialUserState = {
   nextTaskId: null,
   userId: "VwluITXKsWrvtPfrusis",
   lastSynced: null,
-  ranks: [
-    {
-      id: 1,
-      minExp: 0,
-      maxExp: 400,
-      title: "Blissful Pawn",
-      icon: "chess-pawn",
-    },
-    {
-      id: 2,
-      minExp: 401,
-      maxExp: 1000,
-      title: "Zealous Knight",
-      icon: "chess-knight",
-    },
-    {
-      id: 3,
-      minExp: 1001,
-      maxExp: 2000,
-      title: "Famed Bishop",
-      icon: "chess-bishop",
-    },
-    {
-      id: 4,
-      minExp: 2001,
-      maxExp: 3500,
-      title: "Legendary Rook",
-      icon: "chess-rook",
-    },
-    {
-      id: 5,
-      minExp: 3501,
-      maxExp: 6000,
-      title: "Sovereign Queen",
-      icon: "chess-queen",
-    },
-    {
-      id: 6,
-      minExp: 6001,
-      maxExp: Infinity,
-      title: "Supreme King",
-      icon: "chess-king",
-    }
-  ],
+  ranks: [],
   status: "idle",
   error: null,
 };
@@ -164,6 +121,7 @@ const userSlice = createSlice({
       state.userName = data.userName;
       state.darkMode = data.darkMode;
       state.lastSynced = data.lastSynced;
+      state.ranks = data.rank
       state.status = "initialized";
     });
   },

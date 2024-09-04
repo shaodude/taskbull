@@ -1,23 +1,61 @@
 {
   "darkMode": true,
-  "lastLoginDate": "2024-08-01",
-  "lastSynced": "2024-08-01",
+  "lastLoginDate": "2024-08-30T09:39:44.630Z",
+  "lastSynced": "2024-08-30T09:39:44.630Z",
   "loginStreak": 3,
   "nextTaskId": 2,
   "tasks": [
     {
-      "completed": false,
-      "completedDate": "",
-      "dateCreated": "2024-07-30T12:01:16.616Z",
+      "completed": true,
+      "completedDate": "2024-08-03T12:01:16.616Z",
+      "dateCreated": "2024-08-03T11:56:18.944Z",
       "deleted": false,
-      "difficulty": 1,
-      "dueDate": "2025-01-01T12:01:16.616Z",
+      "difficulty": 2,
+      "dueDate": "2024-08-29T16:00:00.000Z",
       "id": 1,
       "importance": 2,
       "remarks": "",
       "title": "Pay utility bills"
     }
   ],
-  "userExp": 6000,
-  "userName": "Jason"
+  "userExp": 3210,
+  "userName": "Max",
+  "rank": [
+    {
+      "icon": "chess-pawn",
+      "maxExp": 400,
+      "minExp": 0,
+      "title": "Blissful Pawn"
+    },
+    {
+      "icon": "chess-knight",
+      "maxExp": 1000,
+      "minExp": 401,
+      "title": "Zealous Knight"
+    },
+    {
+      "icon": "chess-bishop",
+      "maxExp": 2000,
+      "minExp": 1001,
+      "title": "Famed Bishop"
+    },
+    {
+      "icon": "chess-rook",
+      "maxExp": 3500,
+      "minExp": 2001,
+      "title": "Legendary Rook"
+    },
+    {
+      "icon": "chess-queen",
+      "maxExp": 6000,
+      "minExp": 3501,
+      "title": "Sovereign Queen"
+    },
+    {
+      "icon": "chess-king",
+      "maxExp": 1000000,
+      "minExp": 6001,
+      "title": "Supreme King"
+    }
+  ]
 }

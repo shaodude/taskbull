@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Provider } from "react-native-paper";
+import { Provider, ActivityIndicator } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import emailjs, { EmailJSResponseStatus } from "@emailjs/react-native";
 import Toast from "react-native-toast-message";
@@ -30,6 +30,7 @@ const ReportIssueScreen = () => {
   const styles = createStyles(darkMode);
   const userId = useSelector((state) => state.user.userId);
   const [message, onChangeMessage] = useState("");
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const templateParams = {
     user_id: userId,
@@ -38,6 +39,7 @@ const ReportIssueScreen = () => {
 
   const handleReport = async () => {
     try {
+      setShowSpinner(true);
       await emailjs.send(
         "service_xnh7dxo",
         "template_t52fqut",
@@ -46,6 +48,7 @@ const ReportIssueScreen = () => {
           publicKey: "OmXbZpvdGK8oyrn8Q",
         }
       );
+      setShowSpinner(false);
       console.log("SUCCESS!");
       navigation.navigate("Settings");
       Toast.show({
@@ -124,6 +127,13 @@ const ReportIssueScreen = () => {
                   onPress={handleReport}
                 />
               </View>
+
+              <ActivityIndicator
+                style={{ marginTop: 15 }}
+                animating={showSpinner}
+                color={colors.darkAccent}
+                size={"large"}
+              />
             </View>
           </ScrollView>
         </View>

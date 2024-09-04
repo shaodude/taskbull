@@ -9,7 +9,7 @@ describe("PrioritizeTask", () => {
     expect(PrioritizeTask([], highUserMotivation)).toBeNull();
   });
 
-  test("returns task when there is only one task", () => {
+  test("returns task when there is only one task in task list", () => {
     const taskListwithOneTask = [
       { id: 1, dueDate: "2025-08-15", difficulty: 3, importance: 1 },
     ];
@@ -17,7 +17,7 @@ describe("PrioritizeTask", () => {
     expect(result).toEqual(taskListwithOneTask[0]);
   });
 
-  test("returns task due within 48 hours when there is one", () => {
+  test("returns task due within 48 hours when there is one in task list", () => {
     const today = dayjs();
     const tomorrow = today.add(1, "day");
     const tomorrowFormatted = tomorrow.format("YYYY-MM-DD");
