@@ -1,4 +1,7 @@
 # Taskbull - A Task Manager Mobile Application
+![Interface Snapshots](./assets/interface_dark_1.png)
+![Interface Snapshots](./assets/interface_dark_2.png)
+
 
 ## Project Description
 Taskbull is a modern task manager application developed as part of a Final Year Project (FYP). It features a robust task prioritization algorithm and includes all essential features to offer users an effective and user-friendly task management experience.
@@ -37,7 +40,7 @@ The application should be bundled and waiting.
 
 ![Interface Snapshots](./assets/sample_run.png)
 
-You can launch the application on your own device using Expo Go (required download). Read more on https://expo.dev/go.
+You can launch the application on your own device using Expo Go (requires download). Read more on https://expo.dev/go.
 
 Alternatively, you can launch the application using an emulator (requires download and setup).
 
