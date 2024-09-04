@@ -186,7 +186,7 @@ const HomeScreen = () => {
     });
   };
 
-  // link database rank icon to file's import (need to be improved)
+  // link database rank icon to file's import (can be improved)
   const iconMap = {
     "chess-pawn": faChessPawn,
     "chess-knight": faChessKnight,
