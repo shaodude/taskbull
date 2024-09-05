@@ -38,7 +38,7 @@ npx expo
 ```
 The application should be bundled and waiting.
 
-![Interface Snapshots](./assets/sample_run.png)
+![QR code](./assets/sample_run.png)
 
 You can launch the application on your own device using Expo Go (requires download). Read more on https://expo.dev/go.
 
