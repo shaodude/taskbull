@@ -25,7 +25,7 @@ Taskbull is a modern task manager application developed as part of a Final Year 
 8. Application Feedback: Every user action receives feedback through Toast Messages, ensuring a responsive and interactive experience.
 
 
-## How to Run
+## How to Run Locally
 First, ensure that package-lock.json is deleted.
 
 Next, run this command in the terminal to install dependencies packages.
@@ -46,6 +46,10 @@ Alternatively, you can launch the application using an emulator (requires downlo
 
 
 ## Testing
-1. Unit Testing by Jest.
+1. Unit Testing by Jest. To run Jest test suites, run the following code in the terminal.
+
+```
+npm run test
+```
 
 2. User Testing using Blackbox (Task-based Testing) and User Acceptance Testing (UAT) with System Usability Scale (SUS) template.
