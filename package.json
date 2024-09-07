@@ -44,7 +44,12 @@
     "react-native-toast-message": "*",
     "react-native-ui-datepicker": "*",
     "react-native-vector-icons": "*",
-    "react-redux": "^9.1.2"
+    "react-redux": "^9.1.2",
+    "expo-updates": "~0.25.24",
+    "react-native-reanimated": "^3.15.1",
+    "react-native-gesture-handler": "^2.19.0",
+    "expo-system-ui": "^3.0.7",
+    "@react-native-community/masked-view": "^0.1.11"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

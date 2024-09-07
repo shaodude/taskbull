@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "taskbull---improved",
-    "slug": "snack-322aa646-e28a-4999-9ad0-c01159e6e662",
+    "slug": "taskbull-preview",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,7 +18,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.READ_CALENDAR",
+        "android.permission.WRITE_CALENDAR"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,6 +34,18 @@
           "calendarPermission": "The app needs to access your calendar."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2175144c-b7f8-410e-b581-cbdd5d287abe"
+      }
+    },
+    "owner": "shaodude",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/2175144c-b7f8-410e-b581-cbdd5d287abe"
+    }
   }
 }
