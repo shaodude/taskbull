@@ -30,7 +30,7 @@ Taskbull is a modern task manager application developed as part of a Final Year 
 
 https://expo.dev/preview/update?message=initial%20commit%20-%20preview%20build&updateRuntimeVersion=1.0.0&createdAt=2024-09-07T21%3A55%3A06.269Z&slug=exp&projectId=2175144c-b7f8-410e-b581-cbdd5d287abe&group=513438aa-3236-47b4-b783-174721b36d48. 
 
-(Expo Go application download needed, https://expo.dev/go)
+(Expo Go application can be downloaded from this link, https://expo.dev/go)
 
 
 ## How to Run Locally
